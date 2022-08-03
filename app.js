@@ -63,6 +63,6 @@ app.delete('/api/notes/:id', (request,response) => {
 
 
 app.listen(port,() => {
-    console.log(`server be running and running on ${PORT}`)
+    console.log(`server be running and running on ${port}`)
 })
 
