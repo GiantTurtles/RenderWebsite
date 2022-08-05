@@ -10,11 +10,16 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ui": "rm -rf build && cd ../../../1/ && npm run build && cp -r build ../RenderWebsite",
+    "deploy": "git push https://github.com/GiantTurtles/RenderWebsite.git",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.16.3"
+    "dotenv": "^16.0.1",
+    "express": "^4.16.3",
+    "mongoose": "^6.5.1"
   },
   "engines": {
     "node": ">=14"

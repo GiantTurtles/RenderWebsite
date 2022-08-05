@@ -1,31 +1,34 @@
+require('dotenv').config()
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
-
 const cors = require('cors')
+const Note = require('./models/note')
+
 app.use(cors())
 app.use(express.static('build'))
 
-let notes = [
-    {
-      id: 1,
-      content: "HTML is easy",
-      date: "2022-05-30T17:30:31.098Z",
-      important: true
-    },
-    {
-      id: 2,
-      content: "Browser can execute only Javascript",
-      date: "2022-05-30T18:39:34.091Z",
-      important: false
-    },
-    {
-      id: 3,
-      content: "GET and POST are the most important methods of HTTP protocol",
-      date: "2022-05-30T19:20:14.298Z",
-      important: true
-    }
-  ]
+
+// let notes = [
+//     {
+//       id: 1,
+//       content: "HTML is easy",
+//       date: "2022-05-30T17:30:31.098Z",
+//       important: true
+//     },
+//     {
+//       id: 2,
+//       content: "Browser can execute only Javascript",
+//       date: "2022-05-30T18:39:34.091Z",
+//       important: false
+//     },
+//     {
+//       id: 3,
+//       content: "GET and POST are the most important methods of HTTP protocol",
+//       date: "2022-05-30T19:20:14.298Z",
+//       important: true
+//     }
+//   ]
 
 app.get('/', (request, response) => {
     console.log('PPPPPPO')
@@ -33,7 +36,9 @@ app.get('/', (request, response) => {
 })
 
 app.get('/api/notes', (request, response) => {
-    response.json(notes)
+    Note.find({}).then(notes => {
+      response.json(notes)
+    })
   })
 
 app.get('/api/notes/:id', (request, response) => {
