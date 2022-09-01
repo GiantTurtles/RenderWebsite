@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 if (process.argv < 3) {
-    console.log('Please provide passwrod: node mongo.js <password>')
-    process.exit(1)
+  console.log('Please provide passwrod: node mongo.js <password>')
+  process.exit(1)
 }
 
 const password = process.argv[2]
@@ -10,25 +10,24 @@ const password = process.argv[2]
 const url = `mongodb+srv://admin:${password}@protobase.ie9mqhx.mongodb.net/Note?retryWrites=true&w=majority`
 
 const noteSchema = new mongoose.Schema({
-    content: String,
-    date: Date,
-    important: Boolean,
+  content: String,
+  date: Date,
+  important: Boolean,
 })
 
 const Note = mongoose.model('Note',noteSchema)
 
-console.log('PPPPP');
 
 mongoose
-    .connect(url)
-    .then((result) => {
-        console.log('connected')})
+  .connect(url)
+  .then(() => {
+    console.log('connected')})
 
 Note.find({}).then(result => {
-    result.forEach(note => {
-        console.log(note)
-    })
-    mongoose.connection.close()
+  result.forEach(note => {
+    console.log(note)
+  })
+  mongoose.connection.close()
 })
 
 // mongoose
